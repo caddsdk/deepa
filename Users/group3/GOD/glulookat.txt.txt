@@ -1,0 +1,55 @@
+
+Name
+gluLookAt — define a viewing transformation
+C Specification
+void gluLookAt(
+GLdouble eyeX, 
+ 
+GLdouble eyeY, 
+ 
+GLdouble eyeZ, 
+ 
+GLdouble centerX, 
+ 
+GLdouble centerY, 
+ 
+GLdouble centerZ, 
+ 
+GLdouble upX, 
+ 
+GLdouble upY, 
+ 
+GLdouble upZ);
+ 
+Parameters
+eyeX, eyeY, eyeZ
+Specifies the position of the eye point. 
+centerX, centerY, centerZ
+Specifies the position of the reference point. 
+upX, upY, upZ
+Specifies the direction of the up vector. 
+Description
+gluLookAt creates a viewing matrix derived from an eye point, a reference point indicating the center of the scene, and an UP vector. 
+The matrix maps the reference point to the negative z axis and the eye point to the origin. When a typical projection matrix is used, the center of the scene therefore maps to the center of the viewport. Similarly, the direction described by the UP vector projected onto the viewing plane is mapped to the positive y axis so that it points upward in the viewport. The UP vector must not be parallel to the line of sight from the eye point to the reference point. 
+Let 
+
+F = centerX - eyeX centerY - eyeY centerZ - eyeZ 
+
+
+Let UP be the vector upX upY upZ . 
+Then normalize as follows: 
+f = F F 
+
+
+UP ? = UP UP 
+
+
+Finally, let s = f × UP ? , and u = s s × f . 
+
+M is then constructed as follows: 
+M = s ? 0 s ? 1 s ? 2 0 u ? 0 u ? 1 u ? 2 0 - f ? 0 - f ? 1 - f ? 2 0 0 0 0 1 
+
+and gluLookAt is equivalent to 
+glMultMatrixf(M);
+glTranslated(-eyex, -eyey, -eyez);
+            

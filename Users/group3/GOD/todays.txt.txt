@@ -1,0 +1,800 @@
+#include<iostream>
+#include<GL/glut.h>
+#define PI_2 360
+using namespace std;
+static int option=1;
+float m = 0.0;    //movement of clouds 
+void DrawCircle(float cx, float cy, float r)
+{
+	int n = 50;
+
+	glBegin(GL_POLYGON);
+	for (int i = 0; i < n; i++)
+	{
+
+		//	glColor3f(0.0, .0, 0.0);
+		float theta = 2.0f*3.1415926*(float)(i) / (float)(n);
+		float x = r*cos(theta);
+		float y = r*sin(theta);
+		float z = 0.0;
+		glVertex3f(x + cx, y + cy, z);
+
+	}
+	glEnd();
+
+}
+void cloud() {
+	int l;
+	//cloud1 
+	for ( l = 0; l <= 20; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(150 + m, 850, l);
+
+	}
+	for (l = 0; l <= 35; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(195 + m, 850, l);
+		DrawCircle(225 + m, 850, l);
+	}
+
+	for (l = 0; l <= 20; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(250 + m, 850, l);
+	}
+	//cloud2 
+	for (l = 0; l <= 20; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(550 + m, 870, l);
+	}
+	for (l = 0; l <= 35; l++)
+	{
+
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(590 + m, 870, l);
+		DrawCircle(650 + m, 870, l);
+		DrawCircle(690 + m, 870, l);
+	}
+	for (l = 0; l <= 20; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(725 + m, 870, l);
+	}
+	//cloud3 
+	for (l = 0; l <= 25; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(50 + m, 750, l);
+	}
+	for (l = 0; l <= 45; l++)
+	{
+
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(90 + m, 750, l);
+		DrawCircle(150 + m, 750, l);
+		DrawCircle(190 + m, 750, l);
+	}
+
+	for (l = 0; l <= 25; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(225 + m, 750, l);
+	}
+	for (l = 0; l <= 25; l++)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		DrawCircle(260 + m, 750, l);
+	}
+
+
+}
+/*vertex of big boy*/
+GLfloat VERTICES[][3] = {
+	{ -75.0,0.0,10.0 },{ 75.0,0.0,10.0 },{ 75.0,75.0,10.0 },{ -75.0,75.0,10.0 },{ -75.0,0.0,-10.0 },{ 75.0,0.0,-10.0 },{ 75.0,75.0,-10.0 },{ -75.0,75.0,-10.0 }
+};
+GLfloat legfvertex[][3] = { { -75.0,-75.0,3.0 },{ -50.0,-75.0,3.0 },{ -50.0,0.0,3.0 },{ -75.0,0.0,3.0 },{ -75.0,-75.0,-3.0 },{ -50.0,-75.0,-3.0 },{ -50.0,0.0,-3.0 },{ -75.0,0.0,-3.0 } };
+GLfloat legsvertex[][3] = { { 75.0,-75.0,3.0 },{ 50.0,-75.0,3.0 },{ 50.0,0.0,3.0 },{ 75.0,0.0,3.0 },{ 75.0,-75.0,-3.0 },{ 50.0,-75.0,-3.0 },{ 50.0,0.0,-3.0 },{ 75.0,0.0,-3.0 } };
+GLfloat handfvertex[][3] = { { -100.0,65.0,50.0 },{ -75.0,65.0,50.0 },{ -75.0,70.0,50.0 },{ -100.0,70.0,50.0 },{ -100.0,65.0,-1.0 },{ -75.0,65.0,-1.0 },{ -75.0,70.0,-1.0 },{ -100.0,70.0,-1.0 } };
+GLfloat handsvertex[][3] = { { 104.0,10.0,2.0 },{ 79.0,10.0,2.0 },{ 79.0,70.0,2.0 },{ 104.0,70.0,2.0 },{ 104.0,10.0,-2.0 },{ 79.0,10.0,-2.0 },{ 79.0,70.0,-2.0 },{ 104.0,70.0,-2.0 } };
+/*vertex of smal boy*/
+GLfloat VERTICES2[][3] = {
+	{ -75.0,0.0,10.0 },{ 75.0,0.0,10.0 },{ 75.0,75.0,10.0 },{ -75.0,75.0,10.0 },{ -75.0,0.0,-10.0 },{ 75.0,0.0,-10.0 },{ 75.0,75.0,-10.0 },{ -75.0,75.0,-10.0 }
+};
+GLfloat legfvertex2[][3] = { { -75.0,-75.0,3.0 },{ -50.0,-75.0,3.0 },{ -50.0,0.0,3.0 },{ -75.0,0.0,3.0 },{ -75.0,-75.0,-3.0 },{ -50.0,-75.0,-3.0 },{ -50.0,0.0,-3.0 },{ -75.0,0.0,-3.0 } };
+GLfloat legsvertex2[][3] = { { 75.0,-75.0,3.0 },{ 50.0,-75.0,3.0 },{ 50.0,0.0,3.0 },{ 75.0,0.0,3.0 },{ 75.0,-75.0,-3.0 },{ 50.0,-75.0,-3.0 },{ 50.0,0.0,-3.0 },{ 75.0,0.0,-3.0 } };
+GLfloat handfvertex2[][3] = { { -100.0,65.0,50.0 },{ -75.0,65.0,50.0 },{ -75.0,70.0,50.0 },{ -100.0,70.0,50.0 },{ -100.0,65.0,-1.0 },{ -75.0,65.0,-1.0 },{ -75.0,70.0,-1.0 },{ -100.0,70.0,-1.0 } };
+GLfloat handsvertex2[][3] = { { 100.0,65.0,50.0 },{ 75.0,65.0,50.0 },{ 75.0,70.0,50.0 },{ 100.0,70.0,50.0 },{ 100.0,65.0,-1.0 },{ 75.0,65.0,-1.0 },{ 75.0,70.0,-1.0 },{ 100.0,70.0,-1.0 } };
+	// { 100.0,10.0,2.0 },{ 75.0,10.0,2.0 },{ 75.0,70.0,2.0 },{ 100.0,70.0,2.0 },{ 100.0,10.0,-2.0 },{ 75.0,10.0,-2.0 },{ 75.0,70.0,-2.0 },{ 100.0,70.0,-2.0 } };
+/*vertex boundry feence*/
+GLfloat fencev[][3] = {
+	{ -500.0,200.0,-10.0 },{ -500.0,150.0,-10.0 },{ 50.0,150.0,-10.0 },{ 50.0,200.0,-10.0 },
+	{ -50.0,0.0,-10.0 },{ -50.0,300.0,-10.0 },{ -100.0,300.0,-10.0 },{ -100,0.0,-10.0 },
+	{ -150.0,0.0,-10.0 },{ -150,300.0,-10.0 },{ -200.0,300.0,-10.0 },{ -200,0.0,-10.0 },
+	{ -250.0,0.0,-10.0 },{ -250,300.0,-10.0 },{ -300.0,300.0,-10.0 },{ -300,0.0,-10.0 },
+	{ -350.0,0.0,-10.0 },{ -350,300.0,-10.0 },{ -400.0,300.0,-10.0 },{ -400,0.0,-10.0 },
+	{ -450.0,0.0,-10.0 },{ -450,300.0,-10.0 },{ -500.0,300.0,-10.0 },{ -500,0.0,-10.0 }
+};
+/*vertex of ground*/
+GLfloat vertices[][3] = {
+	{ -0999.0,0.0,10.0 },{ -999.0,-990.0,10.0 },{ 999.0,-990.0,10.0 },{ 999.0,0.0,10.0 },
+	{ -0999.0,0.0,-10.0 },{ -999.0,-990.0,-10.0 },{ 999.0,-990.0,-10.0 },{ 999.0,0.0,-10.0 },
+
+};
+/*vertex of tree*/
+GLfloat treevertex[][3] = {
+	{ -700.0,900.0,-10.0 },{ -600.0,800.0,-10.0 },
+	{ -650.0,800.0,-10.0 },{ -500.0,700.0,-10.0 },
+	{ -600.0,700.0,-10.0 },{ -500.0,600.0,-10.0 },
+	{ -550.0,600.0,-10.0 },{ -450.0,500.0,-10.0 },
+	{ -500.0,500.0,-10.0 },{ -400.0,400.0,-10.0 },
+	{ -990.0,400.0,-10.0 },{ -900.0,500.0,-10.0 },
+	{ -950.0,500.0,-10.0 },{ -850.0,600.0,-10.0 },
+	{ -900.0,600.0,-10.0 },
+	{ -800.0,700.0,-10.0 },{ -900.0,700.0,-10.0 },{ -750.0,800.0,-10.0 },{ -800.0,800.0,-10.0 },
+	{ -750.0,400.0,10.0 },{ -650.0,400.0,10.0 },{ -650.0,0.0,10.0 },{ -750.0,0.0,10.0 }
+};
+/*grass vertices*/
+GLfloat grassv[][3] = {
+	{ 800.0,0.0,10.0 },{ 800.0,50.0,10.0 },{ 750.0,0.0,10.0 },{ 750.0,100.0,10.0 },{ 700.0,50.0,10.0 },{ 650.0,150.0,10.0 },
+	{ 600.0,50.0,10.0 },{ 550.0,100.0,10.0 },{ 550.0,0.0,10.0 },{ 500.0,50.0,10.0 },{ 500.0,0.0,10.0 } };
+/*color for the cground*/
+GLfloat colors[][3] = {
+	{ 1.0,0.69,0.69 },{ 0.8,0.4,0.0 },{ 1.0,0.69,0.69 },{ 0.8,0.4,0.0 },{ 1.0,0.69,0.69 },{ 0.8,0.4,0.0 },{ 1.0,0.69,0.69 },
+	{ 0.8,0.4,0.0 }
+};
+
+void bucket2() {
+	glColor3f(0.64, 0.16, 0.16);
+
+	glBegin(GL_POLYGON);
+	glColor3f(0.73, 0.36, 0.0);
+	glVertex3f(-775.0, -150.0, 0.0);
+	glColor3f(0.64, 0.16, 0.16);
+
+	glVertex3f(-625.0, -150.0, 0.0);	
+	glColor3f(0.64, 0.16, 0.0);
+	glVertex3f(-675.0, -300.0, 0.0);
+	glColor3f(0.73, 0.36, 0.0);
+	glVertex3f(-725.0, -300.0, 0.0);
+	glEnd();
+
+	glBegin(GL_LINES);
+	glVertex3f(-775.0, -150.0, 10.0);
+	glVertex3f(-700.0,-100.0, 10.0);
+	glEnd();
+	//glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_LINES);
+	glVertex3f(-625.0, -150.0, 10.0);
+	glVertex3f(-700.0, -100.0, 10.0);
+	glEnd();
+
+
+}
+void tree() {
+	glColor3f(0.0, 1.0, 0.0);
+	/*leaves of tree*/
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.8, 0.0);
+	glVertex3fv(treevertex[0]);
+	glColor3f(0.0, 1.0, 0.0);
+	for (int i = 0; i <= 18; i++)
+		glVertex3fv(treevertex[i]);
+	glEnd();
+	glColor3f(0.35, 0.14, 0.16);
+	/*bark of tree*/
+	glBegin(GL_POLYGON);
+	glColor3f(0.8, 0.4, 0.0);
+	glVertex3fv(treevertex[19]); glColor3f(0.35, 0.14, 0.16);
+	glVertex3fv(treevertex[20]);
+	glVertex3fv(treevertex[21]);
+	glColor3f(0.8, 0.4, 0.0);
+	glVertex3fv(treevertex[22]);
+	glEnd();
+
+}
+
+
+/*draw the ground*/
+void ground(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3fv(colors[a]);
+	glVertex3fv(vertices[a]);
+	glColor3fv(colors[b]);
+	glVertex3fv(vertices[b]);
+	glColor3fv(colors[c]);
+	glVertex3fv(vertices[c]);
+	glColor3fv(colors[d]);
+	glVertex3fv(vertices[d]);
+	glEnd();
+}
+
+void displaycube() {
+	ground(0, 1, 2, 3);
+}
+
+void grass() {
+
+
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.4, 0.0);
+	glVertex3fv(grassv[0]);
+	glVertex3fv(grassv[10]);
+	glColor3f(0.0, 1.0, 0.0);
+	for (int i = 1; i < 10; i++)
+		glVertex3fv(grassv[i]);
+	glEnd();
+}
+void drawrect(int a, int b, int c, int d) {
+	glColor3f(1.0, 0.85, 0.09);
+	glBegin(GL_POLYGON);
+	glVertex3fv(fencev[a]);
+	glVertex3fv(fencev[b]);
+	glColor3f(0.35, 0.14, 0.16);
+	glVertex3fv(fencev[c]);
+	glVertex3fv(fencev[d]);
+	glEnd();
+}
+
+void fence() {
+	glColor3f(1.0, 0.85, 0.09);
+	drawrect(0, 1, 2, 3);
+	drawrect(4, 5, 6, 7);
+	drawrect(8, 9, 10, 11);
+	drawrect(12, 13, 14, 15);
+	drawrect(16, 17, 18, 19);
+}
+
+//0.87,0.44,0.8
+//0.67,015,0.58
+void kite() {
+	glColor3f(0.0, 0.0, 0.0);
+	//glLineWidth(10.0);
+	glBegin(GL_LINES);
+	glVertex3f(-50.0, 65.0, 50.0);
+	glVertex3f(200.0, 300.0, 50.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex3f(200.0, 300.0, 50.0);
+	glVertex3f(250.0, 450.0, 50.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex3f(250.0, 350.0, 50.0);
+	glVertex3f(200.0, 400.0, 50.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex3f(250.0, 350.0, 50.0);
+	glVertex3f(200.0, 300.0, 50.0);
+	glEnd();
+	//glColor3f(0.2, 0.4, 0.8);
+	glBegin(GL_POLYGON);
+	glColor3f(0.9, 0.6, 0.85);
+	glVertex3f(200.0, 300.0, 50.0);
+	glVertex3f(250.0, 350.0, 50.0);
+	glColor3f(0.4, 0.09, 0.35);
+	glVertex3f(250.0, 450.0, 50.0);
+	glVertex3f(200.0, 400.0, 50.0);
+	glEnd();
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex3f(200.0, 300.0, 50.0);
+	glVertex3f(250.0, 350.0, 50.0);
+	glVertex3f(250.0, 450.0, 50.0);
+	glVertex3f(200.0, 400.0, 50.0);
+	glEnd();
+
+}
+
+void polygon(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 0.0, 0.5);
+	glVertex3fv(VERTICES[a]);
+	glVertex3fv(VERTICES[b]);
+	glColor3f(1.0, 0.5, 0.75);
+	glVertex3fv(VERTICES[c]);
+	glVertex3fv(VERTICES[d]);
+	glEnd();
+
+}
+void polygon2(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 0.0, 0.5);
+	glVertex3fv(VERTICES2[a]);
+	glVertex3fv(VERTICES2[b]);
+	glColor3f(1.0, 0.5, 0.75);
+	glVertex3fv(VERTICES2[c]);
+	glVertex3fv(VERTICES2[d]);
+	glEnd();
+
+}
+void cube() {
+	polygon(0, 1, 2, 3);
+	polygon(1, 5, 6, 2);
+	polygon(4, 7, 6, 5);
+	polygon(0, 3, 7, 4);
+	polygon(3, 2, 6, 7);
+	polygon(0, 4, 5, 1);
+}
+void cube2() {
+	polygon2(0, 1, 2, 3);
+	polygon2(1, 5, 6, 2);
+	polygon2(4, 7, 6, 5);
+	polygon2(0, 3, 7, 4);
+	polygon2(3, 2, 6, 7);
+	polygon2(0, 4, 5, 1);
+}
+void handspolygon(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 0.0);
+	glColor3f(1.0f, 0.76f, 0.76f);
+	glVertex3fv(handsvertex[a]);
+	glVertex3fv(handsvertex[b]);
+	glColor3f(01.0, 0.610, 0.610);
+	glVertex3fv(handsvertex[c]);
+	glVertex3fv(handsvertex[d]);
+	glEnd();
+
+}
+void handspolygon2(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	//glColor3f(0.0, 0.0, 0.0);
+	glColor3f(1.0f, 0.76f, 0.76f);
+	glVertex3fv(handsvertex2[a]);
+	glVertex3fv(handsvertex2[b]);
+	glColor3f(01.0, 0.610, 0.610);
+	glVertex3fv(handsvertex2[c]);
+	glVertex3fv(handsvertex2[d]);
+	glEnd();
+
+}
+void handscube() {
+	handspolygon(0, 1, 2, 3);
+	handspolygon(1, 5, 6, 2);
+	handspolygon(4, 7, 6, 5);
+
+	handspolygon(0, 3, 7, 4);
+	handspolygon(3, 2, 6, 7);
+	handspolygon(0, 4, 5, 1);
+}
+void handscube2() {
+	handspolygon2(0, 1, 2, 3);
+	handspolygon2(1, 5, 6, 2);
+	handspolygon2(4, 7, 6, 5);
+	handspolygon2(0, 3, 7, 4);
+	handspolygon2(3, 2, 6, 7);
+	handspolygon2(0, 4, 5, 1);
+}
+void handfpolygon(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	//glColor3f(0.0, 0.0, 0.0);
+	glColor3f(1.0f, 0.76f, 0.76f);
+	glVertex3fv(handfvertex[a]);
+	glVertex3fv(handfvertex[b]);
+	glColor3f(1.0, 0.610, 0.610);
+	glVertex3fv(handfvertex[c]);
+	glVertex3fv(handfvertex[d]);
+	glEnd();
+
+}
+void handfpolygon2(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 0.76f, 0.76f);
+	glVertex3fv(handfvertex2[a]);
+	glVertex3fv(handfvertex2[b]);
+	glColor3f(01.0f, 0.61f, 0.61f);
+	glVertex3fv(handfvertex2[c]);
+	glVertex3fv(handfvertex2[d]);
+	glEnd();
+
+}
+void handfcube() {
+	handfpolygon(0, 1, 2, 3);
+	handfpolygon(1, 5, 6, 2);
+	handfpolygon(4, 7, 6, 5);
+	handfpolygon(0, 3, 7, 4);
+	handfpolygon(3, 2, 6, 7);
+	handfpolygon(0, 4, 5, 1);
+}
+void handfcube2() {
+	handfpolygon2(0, 1, 2, 3);
+	handfpolygon2(1, 5, 6, 2);
+	handfpolygon2(4, 7, 6, 5);
+	handfpolygon2(0, 3, 7, 4);
+	handfpolygon2(3, 2, 6, 7);
+	handfpolygon2(0, 4, 5, 1);
+}
+void legfpolygon(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3fv(legfvertex[a]);
+	glVertex3fv(legfvertex[b]);
+	glColor3f(0.0, 0.0, 0.3);
+	glVertex3fv(legfvertex[c]);
+	glVertex3fv(legfvertex[d]);
+	glEnd();
+
+}
+void legfpolygon2(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3fv(legfvertex2[a]);
+	glVertex3fv(legfvertex2[b]);
+	glColor3f(0.0, 0.0, 0.3);
+	glVertex3fv(legfvertex2[c]);
+	glVertex3fv(legfvertex2[d]);
+	glEnd();
+
+}
+void legfcube() {
+	legfpolygon(0, 1, 2, 3);
+	legfpolygon(1, 5, 6, 2);
+	legfpolygon(4, 7, 6, 5);
+	legfpolygon(0, 3, 7, 4);
+	legfpolygon(3, 2, 6, 7);
+	legfpolygon(0, 4, 5, 1);
+}
+void legfcube2() {
+	legfpolygon2(0, 1, 2, 3);
+	legfpolygon2(1, 5, 6, 2);
+	legfpolygon2(4, 7, 6, 5);
+	legfpolygon2(0, 3, 7, 4);
+	legfpolygon2(3, 2, 6, 7);
+	legfpolygon2(0, 4, 5, 1);
+}
+void legspolygon(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3fv(legsvertex[a]);
+	glVertex3fv(legsvertex[b]);
+	glColor3f(0.0, 0.0, 0.3);
+	glVertex3fv(legsvertex[c]);
+	glVertex3fv(legsvertex[d]);
+	glEnd();
+}
+void legspolygon2(int a, int b, int c, int d) {
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3fv(legsvertex2[a]);
+	glVertex3fv(legsvertex2[b]);
+	glColor3f(0.0, 0.0, 0.3);
+	glVertex3fv(legsvertex2[c]);
+	glVertex3fv(legsvertex2[d]);
+	glEnd();
+
+}
+void legscube() {
+	legspolygon(0, 1, 2, 3);
+	legspolygon(1, 5, 6, 2);
+	legspolygon(4, 7, 6, 5);
+	legspolygon(0, 3, 7, 4);
+	legspolygon(3, 2, 6, 7);
+	legspolygon(0, 4, 5, 1);
+}
+void legscube2() {
+	legspolygon2(0, 1, 2, 3);
+	legspolygon2(1, 5, 6, 2);
+	legspolygon2(4, 7, 6, 5);
+	legspolygon2(0, 3, 7, 4);
+	legspolygon2(3, 2, 6, 7);
+	legspolygon2(0, 4, 5, 1);
+}
+void background() {
+	printf("have a good day");
+
+}
+
+
+static GLfloat  x_dis = 50.0, xs_dis = 50;
+static GLfloat  theta1 = -20.0, theta2 = 0.0;
+static int i = 0;
+static int count_inc = 0;
+
+
+void walk() {
+
+	count_inc = count_inc + 1
+		;
+
+	if (count_inc % 200 == 0)
+	{
+		i = (i + 1) % 3;
+
+		if (i == 0) {
+			theta1 = 20.0;
+			theta2 = -10.0;
+		}
+		else if (i == 1) {
+			theta1 = 05.0; theta2 = -20.0;
+		}
+		else {
+			theta1 = -20.0; theta2 = 10.0;
+		}
+	}
+
+	if (count_inc ==12500) { option = 2; }
+
+	else {
+		x_dis = x_dis - 0.1;
+		xs_dis = xs_dis - 0.05;
+
+	}
+	glutPostRedisplay();
+}
+void man() {
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	//DRAW BODY
+	cube2();
+	glPushMatrix();
+	glRotatef(theta1, 1.0, 0.0, 0.0);
+	legfcube2();
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(theta2, 1.0, 0.0, 0.0);
+	legscube2();
+	glPopMatrix();
+
+	handscube2();
+
+
+	handfcube2();
+
+	glColor3f(1.0f, 0.76f, 0.76f);
+
+
+	// Draw Head
+	glTranslatef(0.0f, 100.0f, 0.0f);
+	glutSolidSphere(25.0f, 20, 20);
+
+	// Draw Eyes
+	glPushMatrix();
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glTranslatef(5.0f, 10.0f, 18.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glTranslatef(-10.0f, 0.0f, 0.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glPopMatrix();
+
+
+
+
+}
+void man2() {
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	//DRAW BODY
+	cube2();
+	glPushMatrix();
+
+	legfcube2();
+	legscube2();
+	glPopMatrix();
+
+	handscube2();
+
+
+	handfcube2();
+
+
+	glColor3f(1.0f, 0.0f, 1.0f);
+
+
+	// Draw Head
+	glTranslatef(0.0f, 100.0f, 0.0f);
+	glutSolidSphere(25.0f, 20, 20);
+
+	// Draw Eyes
+	glPushMatrix();
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glTranslatef(5.0f, 10.0f, 18.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glTranslatef(-10.0f, 0.0f, 0.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glPopMatrix();
+
+
+
+
+}
+void drawSnowMan()
+{
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	//DRAW BODY
+	cube();
+	glPushMatrix();
+	glRotatef(theta1, 1.0, 0.0, 0.0);
+	legfcube();
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(theta2, 1.0, 0.0, 0.0);
+	legscube();
+	glPopMatrix();
+
+	handscube();
+
+
+	handfcube();
+
+	glColor3f(1.0f, 0.76f, 0.76f);
+
+
+	// Draw Head
+	glTranslatef(0.0f, 100.0f, 0.0f);
+	glutSolidSphere(25.0f, 20, 20);
+
+	// Draw Eyes
+	glPushMatrix();
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glTranslatef(5.0f, 10.0f, 18.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glTranslatef(-10.0f, 0.0f, 0.0f);
+	glutSolidSphere(5.0f, 100, 100);
+	glPopMatrix();
+
+
+
+
+}
+void *font, *currentfont;
+void setfont(void *font)
+{
+	currentfont = font;
+}
+void strings(int x, int y, char *string)
+{
+	char *c;
+	glRasterPos2i(x, y);
+	for (c = string; *c != '\0'; c++)
+		glutBitmapCharacter(currentfont, *c);
+}
+void displaysbtalk() {
+	glColor3f(0.350, 1.0, 0.0);
+	glBegin(GL_POLYGON);
+	glVertex3f(-400.0, 200.0, 70.0);
+	glVertex3f(-400.0, 300.0, 70.0);
+
+	glVertex3f(-500.0, 300.0, 70.0);
+	glVertex3f(400.0, 400.0, 70.0);
+	glVertex3f(-100.0, 500.0, 70.0);
+	glVertex3f(-500.0, 500.0, 70.0);
+	glVertex3f(-500.0, 400.0, 70.0);
+	glVertex3f(-500.0, 350.0, 70.0);
+	glEnd();
+	setfont(GLUT_BITMAP_TIMES_ROMAN_24);
+	glColor3f(0.0, 0.0, 0.0);
+	strings(-150, 350, "brother hang on..");
+	setfont(GLUT_BITMAP_TIMES_ROMAN_24);
+	glColor3f(0.0, 0.0, 0.0);
+	strings(-150, 450, "I will help.");
+}
+
+
+void displayhelp() {
+	glColor3f(1.0, 1.0, 0.0);
+	glBegin(GL_POLYGON);
+	glVertex3f(100.0, 200.0, 70.0);
+	glVertex3f(200.0, 300.0, 70.0);
+
+	glVertex3f(400.0, 300.0, 70.0);
+	glVertex3f(500.0, 400.0, 70.0);
+	glVertex3f(400.0, 500.0, 70.0);
+	glVertex3f(200.0, 500.0, 70.0);
+	glVertex3f(100.0, 400.0, 70.0);
+	glVertex3f(200.0, 350.0, 70.0);
+	glEnd();
+	setfont(GLUT_BITMAP_TIMES_ROMAN_24);
+	glColor3f(0.0, 0.0, 0.0);
+	strings(150, 350, "save me!help me!");
+
+}
+void bucket() {
+	printf("hi");
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_LINES);
+	glVertex3f(0.0,-500.0, 20.0);
+	glVertex3f(600.0,-600.0, 20.0);
+	glVertex3f(500.0, -600.0, 20.0);
+	glVertex3f(550.0, -500.0, 20.0);
+	glEnd();
+}
+static void lastscene(int j) {
+	option = 3; 
+}
+void display() {
+	glClearColor(0.2, 0.6, 1.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-999, 999, -999, 999, -100, 100);//view volume
+	if (option == 1) {
+		cloud();
+		tree();
+		grass();
+		fence();
+		displaycube();
+		bucket2();
+		
+		glColor3f(0.30, 0.30, 0.30);
+		DrawCircle(-500.0, -300.0, 120.0);
+		glPushMatrix();
+
+		/*big _bro*/
+		glTranslatef(800.0, -200.0, 0.0);
+		glTranslatef(x_dis, -10.0, 0.0);
+		glPushMatrix();
+		glRotatef(-90.0, 0.0, 1.0, .0);
+		glPushMatrix();
+		glScalef(1.0, 2.0, 1.0);
+		drawSnowMan();
+		glPopMatrix();
+		glPopMatrix();
+		/*kite*/
+		glPushMatrix();
+		glScalef(1.0, 2.0, 1.0);
+		kite();
+		glPopMatrix();
+		/*smal bro*/
+		
+		glTranslatef(150.0, -150.0, 0.0);
+		
+		glRotatef(-90.0, 0.0, 1.0, .0);
+		man();
+		glPopMatrix(); glPopMatrix();
+	}
+	else if(option==2){
+		glColor3f(0.0, 0.30, 0.3);
+		DrawCircle(0.0, 0.0, 990.0);
+		glColor3f(0.0, 0.0, 1.0);
+		DrawCircle(0.0, 0.0, 250);
+		displayhelp();
+		glRotatef(45.0, 1.0, 0.0, 0.0);
+		drawSnowMan();
+		glutTimerFunc(3600, lastscene, 0);
+	}
+	else {
+		tree();
+		grass();
+		fence();
+
+		displaycube();
+	
+		glColor3f(0.0, 0.0, 0.0);
+		DrawCircle(-500.0, -300.0, 100.0);
+		glPushMatrix();
+
+		/*big _bro*/
+		glTranslatef(-700.0, -200.0, 0.0);
+		glPushMatrix();
+		glRotatef(90.0, 0.0, 1.0, .0);
+		glPushMatrix();
+		man2();
+		glPopMatrix();
+		glPopMatrix();
+		glPopMatrix();
+		displaysbtalk();
+
+	}
+	glutSwapBuffers();
+
+}
+
+int main(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitWindowPosition(0, 0);
+	glutInitWindowSize(2000, 2000);
+
+	glutCreateWindow("GROUND");
+
+	glutDisplayFunc(display);
+	glutIdleFunc(walk);
+	glutMainLoop();
+	return 0;
+}
+
